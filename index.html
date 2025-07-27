@@ -5,123 +5,607 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png">
-    <title>BCA SEM 1 materials</title>
-     <style>
+    <title>NOTEWISE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            z-index: -1;
+            animation: floatingOrbs 10s ease-in-out infinite;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #4834d4, #686de0);
+            transform: rotate(45deg);
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #0abde3, #006ba6);
+            border-radius: 20%;
+            animation-delay: 4s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            margin-top: 20px;
+            border-radius: 30px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: containerGlow 3s ease-in-out infinite alternate;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            z-index: -1;
+        }
+
+        header h1 {
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            animation: fadeInDown 1s ease-out, textShimmer 3s ease-in-out infinite;
+            position: relative;
+            font-weight: 900;
+        }
+
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: lineGrow 1.5s ease-out 0.5s both;
+        }
+
+        header h2 {
+            color: #5457ee;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .highlight {
+            color: #fc9e4c;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        ul li {
+            margin: 10px 0;
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        ul li:nth-child(1) { animation-delay: 0.1s; }
+        ul li:nth-child(2) { animation-delay: 0.2s; }
+        ul li:nth-child(3) { animation-delay: 0.3s; }
+        ul li:nth-child(4) { animation-delay: 0.4s; }
+        ul li:nth-child(5) { animation-delay: 0.5s; }
+
+        ul li a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 20px rgba(102, 126, 234, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        ul li a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transition: all 0.6s;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        ul li a:hover::before {
+            left: 100%;
+        }
+
+        ul li a:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        ul li a:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 30px rgba(102, 126, 234, 0.5),
+                0 0 0 8px rgba(102, 126, 234, 0.1);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .notes-section {
+            margin-top: 40px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .notes-section h2 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            border-bottom: 3px solid #74b9ff;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
         table {
             border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out 0.8s both;
         }
+
         table, th, td {
-            border: 2px solid black;
+            border: none;
+        }
+
+        th {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        tr:hover {
+            background: linear-gradient(45deg, #e8f4f8, #f1f8e8);
+            transform: scale(1.02);
+        }
+
+        td:first-child {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        td a {
+            background: linear-gradient(45deg, #00cec9, #55a3ff);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        td a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        td a:hover:before {
+            left: 100%;
+        }
+
+        td a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 206, 201, 0.4);
+        }
+
+        main {
+            margin-top: 40px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        main h2 {
+            color: #2c5f2d;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #00cec9;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(45deg, #ddd6fe, #e0e7ff);
+            border-radius: 15px;
+            border-top: 4px solid #74b9ff;
+            animation: fadeIn 1s ease-out 1.2s both;
+        }
+
+        footer h3 {
+            color: #2c5f2d;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #0984e3;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #74b9ff;
+            text-decoration: underline;
+        }
+
+        .note-box {
+            background: linear-gradient(45deg, #fff7e6, #ffe0b3);
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            animation: slideInRight 1s ease-out 1.4s both;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #74b9ff;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header h2 {
+                font-size: 1.4rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+
+            ul li a, td a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1 align="center"style="color: cadetblue;">BCA SEM 1 STUDY MATERIALS</h1>
-        <h2 style="color: cadetblue;">Here you'll get all the study materials for BCA Sem 1</h2>
-        <p style="color: rgb(104, 173, 25);">Here you'll get all the study mateirals for bca sem 1 like Softcopy of
-            books , Syllabus , Roadmaps for BCA, Exam pattern marking scheme patterns etc.
-        <p style="color: chocolate;"> ➡️ EVRYTHING YOU NEED ⬅️</p>
-        Click on the links below to access the materials:
-        </p>
-        <ul>
-            <li><a href="https://drive.google.com/drive/folders/1P0iaLY0pflFDrVNrY3aBlVjGIquAjPO7?usp=drive_link"
-                    target="_blank">BCA Sem 1
-                    Books</a></li>
-            <li><a href="https://drive.google.com/drive/folders/1-Z6NdxYigGq-lNvxhsh_tEFmLiR9xxvd?usp=drive_link"
-                    target="_blank">BCA Sem 1
-                    Syllabus</a></li>
-            <li><a href="https://drive.google.com/drive/folders/1Xyn3J0wxwp0Hed-oXjCTNfWZ2hZpM9as?usp=drive_link"
-                    target="_blank">BCA
-                    Roadmap</a></li>
-            <li><a href="https://drive.google.com/drive/folders/1J2qXHp-2hLPi_cDwQxbzvqIZnGRl1CZP?usp=drive_link"
-                    target="_blank">BCA 
-                    Exam Pattern</a></li>
-        </ul>
-
-        <header style="color: rgb(0, 0, 0);">
-            <h2"style="color: rgb(0, 0, 0);"  >BCA Sem 1 Notes</h2>
-            <p style="color: rgb(104, 173, 25);">Click on downlaod notes to dwonload notes of the respective
-                subjects.</p>
-        </header>
-        <table>
-            <thead>
-                <tr>
-                    <th style="color: rgb(0, 0, 0);">Subject</th>
-                    <th style="color: rgb(0, 0, 0);">Link</th>
-                </tr>
-                <tr>
-                    <td style="color: rgb(226, 139, 16);">Buisness Communictaion</td>
-                    <td><a style="background-color: rgb(173, 173, 225);"
-                            href="https://drive.google.com/file/d/1ZUgMgy8yZLb8OCP_zAQucJl-r2jDan3J/view?usp=drive_link"
-                            target="_blank">Download Notes</a></td>
-                </tr>
-                <tr>
-                    <td style="color: rgb(226, 139, 16);">HCI</td>
-                    <td><a style="background-color: rgb(173, 173, 225);"
-                            href="https://drive.google.com/drive/folders/1huNtAeJu19OfilZiCHBlQBl4PKRftNGW?usp=drive_link"
-                            target="_blank">Download Notes</a></td>
-                </tr>
-                <tr>
-                    <td style="color: rgb(226, 139, 16);">Basic Mathematics</td>
-                    <td><a style="background-color: rgb(173, 173, 225);"
-                            href="https://drive.google.com/drive/folders/1NIQK6LNs02WDJjRG2w0IqwXkeq2--Nx4?usp=drive_link"
-                            target="_blank">Download Notes</a></td>
-                </tr>
-                <tr>
-                    <td style="color: rgb(226, 139, 16);">PRograming In C</td>
-                    <td><a style="background-color: rgb(173, 173, 225);"
-                            href="https://drive.google.com/drive/folders/1QY4LenFKqRn3Zlg833UXz3LNXF2YHzVX?usp=drive_link"
-                            target="_blank">Download Notes</a></td>
-                </tr>
-                <tr>
-                    <td style="color: rgb(226, 139, 16);">Computer and Information Technology </td>
-                    <td><a style="background-color: rgb(173, 173, 225);"
-                            href="https://drive.google.com/drive/folders/1l0i2U1n8aBE7TKmJ-a9RBa3Km8LjzbAO?usp=drive_link"
-                            target="_blank">Download Notes</a></td>
-                </tr>
-
-        </table>
-
-
-
-
-    </header>
-    <main>
-        <h2 style="color: cadetblue;">Want some model papers?</h2>
-        <p style="color: rgb(104, 173, 25);">Click on the links below to access:</p>
-        <ul>
-            <li><a href="https://drive.google.com/file/d/1BS8kYGGravLYsjqSY5V5nqtJVT6hPsgW/view?usp=drive_link"
-                    target="_blank">Model Paper (Programming in C)</a></li>
-            <li><a href="https://drive.google.com/file/d/1NlvD4MyWMJqwRXZGHSMOa_A5ntVQzUI0/view?usp=drive_link"
-                    target="_blank">Model Paper (HCI)</a></li>
-            <li><a href="https://drive.google.com/file/d/1b2g0j3k4c7J6Y5X8Z9f8F4z5d9e5f6g7/view?usp=drive_link"
-                    target="_blank">Model Paper (Business Communication)</a></li>
-            <li><a href="https://drive.google.com/file/d/1c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8/view?usp=drive_link"
-                    target="_blank">Model Paper (Basic Mathematics)</a></li>
-            <li><a href="https://drive.google.com/file/d/1d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8/view?usp=drive_link"
-                    target="_blank">Model Paper (Computer and Information Technology)</a></li>
-        </ul>
-
-
-        <footer align="center">
-            <h3 style="color: cadetblue;">Want to contribute?</h3>
-        <p style="color: rgb(104, 173, 25);">If you have any additional materials or resources that could help your
-            fellow students, please feel free to contribute. You can share your notes, model papers, or any other
-            relevant content.</p>
-        <p style="color: rgb(104, 173, 25);">Yourcontributions will be greatly appreciated and will help create a more
-            comprehensive resource for everyone.</p>
-            <p style="color: rgb(104, 173, 25);">If you have any questions or suggestions, feel free to reach out <a href="mailto:rounakverma980@gmail.com" >Connect Us</a></p>
-            <p>
-                <b>NOTE:</b> Some of the links may not work as they are not yet updated. Please check back later for updates.
+    <div class="container">
+        <header>
+            <h1>NOTEWISE</h1>
+            <h2>Here you'll get all the study materials for BCA Sem 1</h2>
+            <p style="color: rgb(61, 102, 223);">Here you'll get all the study materials for bca sem 1 like Softcopy of
+                books, Syllabus, Roadmaps for BCA, Exam pattern marking scheme patterns etc.
             </p>
+            <p class="highlight">➡️ EVERYTHING YOU NEED ⬅️</p>
+            <p>Click on the links below to access the materials:</p>
+            <ul>
+                <li><a href="https://drive.google.com/drive/folders/1P0iaLY0pflFDrVNrY3aBlVjGIquAjPO7?usp=drive_link"
+                        target="_blank">📚 BCA Sem 1 Books</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1-Z6NdxYigGq-lNvxhsh_tEFmLiR9xxvd?usp=drive_link"
+                        target="_blank">📋 BCA Sem 1 Syllabus</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1Xyn3J0wxwp0Hed-oXjCTNfWZ2hZpM9as?usp=drive_link"
+                        target="_blank">🗺️ BCA Roadmap</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1J2qXHp-2hLPi_cDwQxbzvqIZnGRl1CZP?usp=drive_link"
+                        target="_blank">📊 BCA Exam Pattern</a></li>
+            </ul>
 
-            <p style=" color: cadetblue;"></p> For BCApaglu By BCApaglu💀</p>
-            <p style="color: cadetblue;">© 2023 BCApaglu | All rights reserved.</p>
+            <div class="notes-section">
+                <h2>BCA Sem 1 Notes</h2>
+                <p style="color: rgb(104, 173, 25);">Click on download notes to download notes of the respective
+                    subjects.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Business Communication</td>
+                            <td><a href="https://drive.google.com/file/d/1ZUgMgy8yZLb8OCP_zAQucJl-r2jDan3J/view?usp=drive_link"
+                                    target="_blank">📥 Download Notes</a></td>
+                        </tr>
+                        <tr>
+                            <td>HCI</td>
+                            <td><a href="https://drive.google.com/drive/folders/1huNtAeJu19OfilZiCHBlQBl4PKRftNGW?usp=drive_link"
+                                    target="_blank">📥 Download Notes</a></td>
+                        </tr>
+                        <tr>
+                            <td>Basic Mathematics</td>
+                            <td><a href="https://drive.google.com/drive/folders/1NIQK6LNs02WDJjRG2w0IqwXkeq2--Nx4?usp=drive_link"
+                                    target="_blank">📥 Download Notes</a></td>
+                        </tr>
+                        <tr>
+                            <td>Programming In C</td>
+                            <td><a href="https://drive.google.com/drive/folders/1QY4LenFKqRn3Zlg833UXz3LNXF2YHzVX?usp=drive_link"
+                                    target="_blank">📥 Download Notes</a></td>
+                        </tr>
+                        <tr>
+                            <td>Computer and Information Technology</td>
+                            <td><a href="https://drive.google.com/drive/folders/1l0i2U1n8aBE7TKmJ-a9RBa3Km8LjzbAO?usp=drive_link"
+                                    target="_blank">📥 Download Notes</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </header>
 
+        <main>
+            <h2>Want some model papers?</h2>
+            <p style="color: rgb(104, 173, 25);">Click on the links below to access:</p>
+            <ul>
+                <li><a href="https://drive.google.com/file/d/1BS8kYGGravLYsjqSY5V5nqtJVT6hPsgW/view?usp=drive_link"
+                        target="_blank">📄 Model Paper (Programming in C)</a></li>
+                <li><a href="https://drive.google.com/file/d/1NlvD4MyWMJqwRXZGHSMOa_A5ntVQzUI0/view?usp=drive_link"
+                        target="_blank">📄 Model Paper (HCI)</a></li>
+                <li><a href="https://drive.google.com/file/d/1b2g0j3k4c7J6Y5X8Z9f8F4z5d9e5f6g7/view?usp=drive_link"
+                        target="_blank">📄 Model Paper (Business Communication)</a></li>
+                <li><a href="https://drive.google.com/file/d/1c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8/view?usp=drive_link"
+                        target="_blank">📄 Model Paper (Basic Mathematics)</a></li>
+                <li><a href="https://drive.google.com/file/d/1d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8/view?usp=drive_link"
+                        target="_blank">📄 Model Paper (Computer and Information Technology)</a></li>
+            </ul>
+        </main>
+
+        <footer>
+            <h3>Want to contribute?</h3>
+            <p style="color: rgb(104, 173, 25);">If you have any additional materials or resources that could help your
+                fellow students, please feel free to contribute. You can share your notes, model papers, or any other
+                relevant content.</p>
+            <p style="color: rgb(104, 173, 25);">Your contributions will be greatly appreciated and will help create a more
+                comprehensive resource for everyone.</p>
+            <p style="color: rgb(104, 173, 25);">If you have any questions or suggestions, feel free to reach out 
+                <a href="mailto:rounakverma980@gmail.com">Connect Us</a></p>
+            
+            <div class="note-box">
+                <p><b>NOTE:</b> Some of the links may not work as they are not yet updated. Please check back later for updates.</p>
+            </div>
+
+            <p style="color: cadetblue;">For BCApaglu By BCApaglu💀</p>
+            <div class="copyright">
+                <p style="color: cadetblue;">© 2023 NOTEWISE | All rights reserved.</p>
+            </div>
         </footer>
-
+    </div>
 </body>
 
 </html>
